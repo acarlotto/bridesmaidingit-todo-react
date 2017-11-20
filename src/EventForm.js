@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
 
+import {Component} from 'react';
 import Event from './Event';
 
 class EventForm extends Component {
@@ -27,6 +28,7 @@ class EventForm extends Component {
     }
   }
 
+  // HTTP REQUESTS
   getEventsRequest() {
     axios
       .get(`${this.backend}/events`, {
@@ -42,6 +44,7 @@ class EventForm extends Component {
         console.error('get events failed!', error.response)
       })
   }
+
 
   patchEventRequest(eventId, data) {
     axios.patch(`${this.backend}/events/${eventId}`, {
@@ -68,6 +71,7 @@ class EventForm extends Component {
     })
   }
 
+  // EVENT HANDLERS
   setEventTitle(event) {
     this.patchEventRequest(event.target.id, {title: event.target.value})
   }

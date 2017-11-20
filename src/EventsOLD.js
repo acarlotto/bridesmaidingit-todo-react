@@ -15,20 +15,20 @@
 //     }
 // }
 
-import React from 'react';
+// import React from 'react';
 
 
-const Events = (props) => {
-    return (
-        <div>
-            <ul>
-            { props.events.map((event, i) => (
-                <li key={i}>{event.title}</li>
-            )
-            )}
-            </ul>
-        </div>
-    );
-};
+// const Events = (props) => {
+//     return (
+//         <div>
+//             <ul>
+//             { props.events.map((event, i) => (
+//                 <li key={i}>{event.title}</li>
+//             )
+//             )}
+//             </ul>
+//         </div>
+//     );
+// };
 
-export default Events;
+// export default Events;
