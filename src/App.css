@@ -25,7 +25,6 @@
 li {
   display: list-item;
   list-style: none;
-  font-size: 20px;
   text-align: -webkit-match-parent;
 }
 
@@ -41,6 +40,20 @@ input, textarea, select, button {
   text-align: start;
   margin: 0em;
   font: 400 20px system-ui;
+}
+
+
+.deleteButton {
+  visibility: hidden;
+  float: right;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: red;
+}
+
+.tile:hover .deleteButton {
+  visibility: visible;
 }
 
 @keyframes App-logo-spin {

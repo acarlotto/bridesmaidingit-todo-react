@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
+import update from 'immutability-helper';
 
+import {Component} from 'react';
 import Event from './Event';
 
 class EventForm extends Component {
@@ -14,7 +16,7 @@ class EventForm extends Component {
       selectedEvent: null
     }
 
-    const bindMethods = ['setEventTitle', 'setSelectedEvent']
+    const bindMethods = ['setEventTitle', 'setSelectedEvent', 'deleteEvent']
     bindMethods.forEach(method => {
       this[method] = this[method].bind(this)
     })
@@ -27,6 +29,7 @@ class EventForm extends Component {
     }
   }
 
+  // GET HTTP REQUEST
   getEventsRequest() {
     axios
       .get(`${this.backend}/events`, {
@@ -43,6 +46,23 @@ class EventForm extends Component {
       })
   }
 
+//DELETE
+  deleteEventRequest(eventId) {
+    axios.delete(`${this.backend}/events/${eventId}`, {
+      headers: {
+        'Authorization': 'Token token=' + this.props.auth.token
+      }
+    })
+      .then(response => {
+      console.log('event handle')
+      const events = update(this.state.events, { $splice:[[eventId, 1]]})
+      this.setState({events: events})
+      this.getEventsRequest()
+    })
+    .catch(error => console.log('this is hard', error))
+  }
+
+//PATCH
   patchEventRequest(eventId, data) {
     axios.patch(`${this.backend}/events/${eventId}`, {
       event: {
@@ -68,12 +88,21 @@ class EventForm extends Component {
     })
   }
 
+  // EVENT HANDLERS
   setEventTitle(event) {
+    console.log(event.target.id)
     this.patchEventRequest(event.target.id, {title: event.target.value})
   }
 
   setSelectedEvent(event) {
     this.setState({selectedEvent: event.target.id})
+  }
+
+  deleteEvent(event) {
+    const eventId = event.target.dataset.id 
+    console.log('testing')
+    console.log(eventId)
+    this.deleteEventRequest(eventId)
   }
 
   render() {
@@ -84,6 +113,7 @@ class EventForm extends Component {
             selected={`${event.id}` == this.state.selectedEvent}
             setEventTitle={this.setEventTitle}
             setSelectedEvent={this.setSelectedEvent}
+            deleteEvent={this.deleteEvent}
             key={event.id}
             eventId={event.id}
             title={event.title}/>
@@ -95,6 +125,7 @@ class EventForm extends Component {
         <ul>
           {eventsList}
         </ul>
+        <a href="#">add a to-do</a>
       </div>
     )
   }
