@@ -1,5 +1,5 @@
 // IMPORT PACKAGES, REACT FIRST
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
 
 // IMPORT ASSETS (IMAGES, STYLES, ETC)
@@ -7,12 +7,13 @@ import logo from './img/logo.png';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import { Grid, Navbar, Nav, NavItem } from 'react-bootstrap';
 
 // IMPORT COMPONENTS
+import {Component} from 'react';
+import { Grid, Navbar, Nav, NavItem } from 'react-bootstrap';
 import EventForm from './EventForm';
 import LoginForm from './LoginForm';
-import DisplayLoginInfo from './DisplayLoginInfo';
+// import DisplayLoginInfo from './DisplayLoginInfo';
 
 class App extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class App extends Component {
   // EVENT HANDLERS
   userNameChange(event) {
     const userName = event.target.value
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const newState = Object.assign({}, prevState)
       newState.auth.userName = userName
       return newState
@@ -121,7 +122,7 @@ class App extends Component {
             <Navbar.Collapse>
               <Nav pullRight>
                 <NavItem></NavItem>
-                <NavItem eventKey={2} href="#" onClick={this.handleSignOut}>Sign out</NavItem>
+                <NavItem onClick={this.handleSignOut}>Sign out</NavItem>
               </Nav>
             </Navbar.Collapse>
           </Grid>

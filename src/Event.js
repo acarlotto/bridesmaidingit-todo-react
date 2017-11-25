@@ -18,6 +18,7 @@ const Event = (props) => {
   }
 
   return (
+    <div>
     <li>
       <input
         id={props.eventId}
@@ -28,7 +29,10 @@ const Event = (props) => {
             ? selectedEventStyle
             : unselectedEventStyle}
         value={props.title}/>
+        <button onClick={props.deleteEvent}
+                data-id={props.eventId} value={props.title}>Delete</button>
     </li>
+    </div>
   )
 }
 
