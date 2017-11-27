@@ -1,10 +1,14 @@
 import React from 'react';
+import FontAwesome from 'react-fontawesome';
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 
 const Event = (props) => {
 
   const eventStyle = {
     background: 'transparent',
-    outline: '0'
+    outline: '0',
+    width: '200px'
   }
 
   const selectedEventStyle = {
@@ -17,11 +21,26 @@ const Event = (props) => {
     ...eventStyle
   }
 
+  const eventButtonStyle = {
+    border: '0px',
+    marginLeft: '5px'
+  }
+
+
+  const hiddenEventButtonStyle = {
+    visibility: 'hidden',
+    ...eventButtonStyle
+  }
+
   return (
     <div>
-    <li>
+    <li> 
+      <CheckboxGroup name={props.title} >
       <input
-        id={props.eventId}
+        autoFocus={props.selected 
+          ? true
+          : false}
+        id={`event-${props.eventId}`}
         onDoubleClick={props.setSelectedEvent}
         onChange={props.setEventTitle}
         readOnly={!props.selected}
@@ -29,8 +48,17 @@ const Event = (props) => {
             ? selectedEventStyle
             : unselectedEventStyle}
         value={props.title}/>
-        <button onClick={props.deleteEvent}
-                data-id={props.eventId} value={props.title}>Delete</button>
+        {/* <button onClick={props.deleteEvent}
+                data-id={props.eventId} value={props.title}>Delete</button> */}
+                <FontAwesome name="trash-o" size="1x" onClick={props.deleteEvent}
+                data-id={props.eventId} value={props.title}/>
+                </CheckboxGroup>
+                <button style={props.selected
+            ? eventButtonStyle
+            : hiddenEventButtonStyle}
+        data-id={props.eventId}            
+        onClick={props.submitEventEdit}
+        >Submit</button>
     </li>
     </div>
   )
