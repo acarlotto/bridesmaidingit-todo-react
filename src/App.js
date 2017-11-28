@@ -7,6 +7,7 @@ import logo from './img/logo.png';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import FontAwesome from 'react-fontawesome';
 
 // IMPORT COMPONENTS
 import {Component} from 'react';
@@ -27,6 +28,7 @@ class App extends Component {
       auth: {
         userName: '',
         password: '',
+        userId: '',
         token: null
       },
       _triggerChildren: { // changing these values at all trigger actions in certain child components
@@ -62,10 +64,13 @@ class App extends Component {
       }
     })
       .then(response => {
+        console.log(response)
         const authToken = response.data.user.token
+        const userId = response.data.user.id
         this.setState(prevState => {
           const newState = Object.assign({}, prevState)
           newState.auth.token = authToken
+          newState.auth.userId = userId
           return newState
         })
       })
@@ -127,10 +132,14 @@ class App extends Component {
             </Navbar.Collapse>
           </Grid>
         </Navbar>
-          <h1 className="App-title">Weddingzeal</h1>
+        
+        
+        <h1 className="App-title">Weddingzeal</h1>
+       
         </header>
         
         <img src={logo} alt="logo"/>
+        <FontAwesome name="diamond" size="3x"/>
         <LoginForm
           password={this.state.auth.password}
           username={this.state.auth.userName}
