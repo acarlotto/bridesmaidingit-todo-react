@@ -1,7 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
-
+// import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 const Event = (props) => {
 
@@ -26,40 +25,60 @@ const Event = (props) => {
     marginLeft: '5px'
   }
 
-
-  const hiddenEventButtonStyle = {
-    visibility: 'hidden',
-    ...eventButtonStyle
+  const deleteButtonStyle = {
+    cursor: 'pointer'
   }
+
+  const hiddenStyle = {
+    visibility: 'hidden'
+  }
+    
 
   return (
     <div>
-    <li> 
-      <CheckboxGroup name={props.title} >
-      <input
-        autoFocus={props.selected 
-          ? true
-          : false}
-        id={`event-${props.eventId}`}
-        onDoubleClick={props.setSelectedEvent}
-        onChange={props.setEventTitle}
-        readOnly={!props.selected}
-        style={props.selected 
+      <li>
+        <input type='checkbox' 
+        style={props.selected
+              ? hiddenStyle
+              : deleteButtonStyle
+            }
+        />
+          <input
+            autoFocus={props.selected
+            ? true
+            : false}
+            id={`event-${props.eventId}`}
+            onDoubleClick={props.setSelectedEvent}
+            onChange={props.setEventTitle}
+            readOnly={!props.selected}
+            style={props.selected
             ? selectedEventStyle
             : unselectedEventStyle}
-        value={props.title}/>
-        {/* <button onClick={props.deleteEvent}
-                data-id={props.eventId} value={props.title}>Delete</button> */}
-                <FontAwesome name="trash-o" size="1x" onClick={props.deleteEvent}
-                data-id={props.eventId} value={props.title}/>
-                </CheckboxGroup>
-                <button style={props.selected
-            ? eventButtonStyle
-            : hiddenEventButtonStyle}
-        data-id={props.eventId}            
-        onClick={props.submitEventEdit}
-        >Submit</button>
-    </li>
+            value={props.title}/>
+            {/* <input 
+            readOnly={!props.selected}
+            placeholder='assignee'
+            style={props.selected
+            ? selectedEventStyle
+            : unselectedEventStyle}/> */}
+          <FontAwesome
+            name="trash-o"
+            size="1x"
+            style={props.selected
+              ? hiddenStyle
+              : deleteButtonStyle
+            }
+            onClick={props.deleteEvent}
+            data-id={props.eventId}
+            value={props.title}/>
+       
+        <button
+          style={props.selected
+          ? eventButtonStyle
+          : hiddenStyle}
+          data-id={props.eventId}
+          onClick={props.submitEventEdit}>Submit</button>
+      </li>
     </div>
   )
 }
