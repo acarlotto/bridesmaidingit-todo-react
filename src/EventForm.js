@@ -201,7 +201,7 @@ class EventForm extends Component {
         <ul>
           {eventsList}
         </ul>
-        <button 
+        <button className="btn btn-success"
             disabled={this.state.selectedEvent === "new event"
               ? true
               : false

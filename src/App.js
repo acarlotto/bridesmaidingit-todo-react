@@ -49,14 +49,14 @@ class App extends Component {
   }
 
   // trick to get auto-login on load (remove later)
-  componentDidMount() {
-    this.setState(prevState => {
-      const newState = Object.assign({}, prevState)
-      newState.auth.userName = 'acarlotto@cox.net'
-      newState.auth.password = 'summer'
-      return newState
-    }, this.loginRequest)
-  }
+  // componentDidMount() {
+  //   this.setState(prevState => {
+  //     const newState = Object.assign({}, prevState)
+  //     newState.auth.userName = 'acarlotto@cox.net'
+  //     newState.auth.password = 'summer'
+  //     return newState
+  //   }, this.loginRequest)
+  // }
 
   // HTTP REQUESTS
   loginRequest() {
@@ -142,10 +142,30 @@ class App extends Component {
         <h1 className="App-title">Weddingzeal</h1>
        
         </header>
+        <div className="container">
+
+            <div className="row">
+
+            <div className="col-md-4">
+            <img src={logo} alt="logo"/>
+            <FontAwesome name="diamond" size="3x"/>
+                </div>
+
         
-        <img src={logo} alt="logo"/>
-        <FontAwesome name="diamond" size="3x"/>
-        <LoginForm
+                <div className="col-md-4">
+                </div>
+        
+                <div className="col-md-4">
+          <Link to='/' style={styles.link}>Home</Link>  &nbsp;&nbsp;&nbsp;&nbsp; 
+          <Link to='/about' style={styles.link}>About</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link to='/login' style={styles.link}>Login</Link> &nbsp;&nbsp;&nbsp;&nbsp; 
+          </div>
+
+          </div>
+          </div>
+
+
+         <LoginForm
           password={this.state.auth.password}
           username={this.state.auth.userName}
           userNameChange={this.userNameChange}
@@ -157,10 +177,6 @@ class App extends Component {
           password={this.state.auth.password}
           username={this.state.auth.userName}
           token={this.state.auth.token}/> */}
-
-          <Link to='/'>Home</Link>  
-          <Link to='/about'>About</Link>  
-          <Link to='/login'>Login</Link>
         
         <EventForm
           triggerGetEvents={this.state._triggerChildren.getEventsRequest}
@@ -176,5 +192,17 @@ class App extends Component {
     );
   }
 }
+
+const styles = {
+  link: {
+    fontFamily: "raleway",
+    fontSize: 22,
+    color: "04819d",
+    ":hover": {
+      textDecoration: "bold",
+      color: "48a6bb",
+    },
+  },
+};
 
 export default App;
