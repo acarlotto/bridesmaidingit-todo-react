@@ -14,7 +14,11 @@ import {Component} from 'react';
 import { Grid, Navbar, Nav, NavItem } from 'react-bootstrap';
 import EventForm from './EventForm';
 import LoginForm from './LoginForm';
+import About from './About';
+
 // import DisplayLoginInfo from './DisplayLoginInfo';
+
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -112,7 +116,8 @@ class App extends Component {
 
 
   render() {
-    return (
+    return(
+<Router>
       <div className="App">
         <header className="App-header">
 
@@ -152,12 +157,22 @@ class App extends Component {
           password={this.state.auth.password}
           username={this.state.auth.userName}
           token={this.state.auth.token}/> */}
+
+          <Link to='/'>Home</Link>  
+          <Link to='/about'>About</Link>  
+          <Link to='/login'>Login</Link>
+        
         <EventForm
           triggerGetEvents={this.state._triggerChildren.getEventsRequest}
           backend={this.backend}
           auth={this.state.auth}
           />
+
+{/* <Route exact path='/' component={index}/> */}
+<Route exact path='/about' component={About}/>
+<Route exact path='/login' component={LoginForm}/>
       </div>
+</Router>
     );
   }
 }
